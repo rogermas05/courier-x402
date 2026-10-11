@@ -1,0 +1,27 @@
+{
+  "name": "dispatch-x402",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dispatch: a voice agent that makes phone calls for other AI agents, paid per call in AUSD over x402.",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "api": "npm run start -w @dispatch/api",
+    "hire": "npm run hire -w @dispatch/agent --",
+    "mcp": "npm run mcp -w @dispatch/agent",
+    "wallets": "tsx scripts/wallets.ts",
+    "test": "npm test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "setup:elevenlabs": "tsx --env-file-if-exists=.env scripts/elevenlabs-setup.ts",
+    "refunds": "npm run refunds -w @dispatch/api"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}

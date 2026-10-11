@@ -1,0 +1,34 @@
+# ─── Secrets: nothing in here may ever be committed ───────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.seed
+seed.txt
+wallet*.json
+**/secrets/
+
+# ─── Local state: job store, call results ──────────────────────────────────
+.local/
+
+# ─── Node ─────────────────────────────────────────────────────────────────
+node_modules/
+.pnpm-store/
+dist/
+build/
+out/
+.next/
+.vercel/
+.turbo/
+*.tsbuildinfo
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+
+# ─── OS / editor ──────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

@@ -54,6 +54,7 @@ minutes. A call that never connects is refunded in full.
 | `apps/api` | The paid HTTP API. x402 resource server with an in-process facilitator, job store, refunds. |
 | `apps/agent` | The paying side: an AUSD-only wallet with a per-call cap, a CLI, and an MCP server. |
 | `apps/web` | The dashboard: every call, its x402 payment and refund on Base, and what was said. |
+| `apps/landing` | The landing page: the real call replayed, the pricing rule to play with, how to hire it. |
 | `packages/caller` | The call engine: ElevenLabs voice agents over a Telnyx SIP trunk, a Telnyx-only provider, a mock, and the transcript-to-outcome report. |
 | `packages/ausd` | AUSD on Base Sepolia: address, EIP-712 domain, faucet, amount conversion. |
 
@@ -110,6 +111,12 @@ the outcome, the x402 receipt and every AUSD transfer on Base Sepolia, linked to
 numbers are masked to their last two digits. With no API reachable it shows calls recorded from
 Base Sepolia instead, and says so in the header. `npm run export:feed -- <job id> ...` refreshes
 that recording from the jobs you choose.
+
+## Landing page
+
+`npm run landing` serves it on port 5190; `npm run build -w @dispatch/landing` writes a static
+site to `apps/landing/dist`. It replays the real ElevenLabs call above, lets you try the pricing
+rule (allowed minutes in, refund out), and links the payment and refund on Base Sepolia.
 
 ## Use it from any agent (MCP)
 

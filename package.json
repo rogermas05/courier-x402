@@ -18,7 +18,8 @@
     "setup:elevenlabs": "tsx --env-file-if-exists=.env scripts/elevenlabs-setup.ts",
     "refunds": "npm run refunds -w @dispatch/api",
     "export:feed": "tsx --env-file-if-exists=.env scripts/export-feed.ts",
-    "web": "npm run dev -w @dispatch/web"
+    "web": "npm run dev -w @dispatch/web",
+    "landing": "npm run dev -w @dispatch/landing"
   },
   "devDependencies": {
     "@types/node": "^22.10.7",

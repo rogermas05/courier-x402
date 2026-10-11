@@ -53,6 +53,7 @@ minutes. A call that never connects is refunded in full.
 |---|---|
 | `apps/api` | The paid HTTP API. x402 resource server with an in-process facilitator, job store, refunds. |
 | `apps/agent` | The paying side: an AUSD-only wallet with a per-call cap, a CLI, and an MCP server. |
+| `apps/web` | The dashboard: every call, its x402 payment and refund on Base, and what was said. |
 | `packages/caller` | The call engine: ElevenLabs voice agents over a Telnyx SIP trunk, a Telnyx-only provider, a mock, and the transcript-to-outcome report. |
 | `packages/ausd` | AUSD on Base Sepolia: address, EIP-712 domain, faucet, amount conversion. |
 
@@ -97,6 +98,19 @@ npm run setup:elevenlabs   # Telnyx SIP connection + ElevenLabs number import, s
 Then set `TELEPHONY_PROVIDER=elevenlabs` and list the numbers Dispatch may call in
 `DISPATCH_ALLOWED_NUMBERS`. With real telephony, any other number is refused before payment.
 
+## Dashboard
+
+```bash
+npm run api    # in one terminal
+npm run web    # in another, then open the URL it prints
+```
+
+The dashboard reads `GET /v1/feed` every few seconds: each call with its stage, the transcript,
+the outcome, the x402 receipt and every AUSD transfer on Base Sepolia, linked to Basescan. Phone
+numbers are masked to their last two digits. With no API reachable it shows calls recorded from
+Base Sepolia instead, and says so in the header. `npm run export:feed -- <job id> ...` refreshes
+that recording from the jobs you choose.
+
 ## Use it from any agent (MCP)
 
 `npm run --silent mcp` serves three tools over stdio (`--silent` keeps npm's banner off the stdio channel): `place_phone_call`, `get_phone_call` and
@@ -117,6 +131,7 @@ manipulated agent cannot sign for more, or in another token.
 | `POST /v1/calls` | Paid. `{to, objective, authorization?, on_behalf_of?, context?, max_minutes?}`. 402, then 202 with `call_id`. |
 | `GET /v1/calls/{call_id}` | Status, then outcome, transcript, payment and refund transactions. |
 | `GET /v1/quote?max_minutes=N` | What a call of up to N minutes costs. |
+| `GET /v1/feed` | Every call for the dashboard, phone numbers masked. |
 | `GET /` | Service description, for agents deciding whether to hire it. |
 
 `authorization` is what Dispatch may agree to on the caller's behalf. Leave it out and the call

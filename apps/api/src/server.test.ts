@@ -135,3 +135,21 @@ describe('GET /v1/quote', () => {
 		expect((await fetch(`${url}/v1/quote?max_minutes=0`)).status).toBe(400);
 	});
 });
+
+describe('GET /v1/feed', () => {
+	it('is readable cross-origin and never shows a full phone number', async () => {
+		const { url } = await boot(settledOk);
+		const buyer = privateKeyToAccount(generatePrivateKey());
+		const pay = wrapFetchWithPaymentFromConfig(fetch, {
+			schemes: [{ network: AUSD.network, client: new ExactEvmScheme(buyer) }],
+			spendControls: { allowedAssets: [{ network: AUSD.network, asset: AUSD.address }] },
+		});
+		await post(url, body, pay);
+		const res = await fetch(`${url}/v1/feed`);
+		expect(res.headers.get('access-control-allow-origin')).toBe('*');
+		const feed = await res.json();
+		expect(feed.calls).toHaveLength(1);
+		expect(feed.calls[0].to).toBe('+1 ••• ••• ••23');
+		expect(JSON.stringify(feed)).not.toContain('4155550123');
+	});
+});

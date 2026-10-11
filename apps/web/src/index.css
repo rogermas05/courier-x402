@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* Midnight navy, chosen for the demo video. Entity hues validated with the
+   dataviz palette checker against the surface below (all checks pass). */
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --color-page: #090d18;
+  --color-surface: #101729;
+  --color-surface-2: #172036;
+  --color-line: #222d47;
+  --color-axis: #2e3b5c;
+  --color-ink: #f4f6fc;
+  --color-ink-2: #b7c0d8;
+  --color-muted: #7d88a6;
+
+  --color-agent: #c48420;
+  --color-dispatch: #8a76ee;
+  --color-ausd: #1aa47f;
+  --color-base: #4a80f0;
+
+  --color-good: #2fbf71;
+  --color-warning: #f2b330;
+  --color-critical: #e5534b;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 85% -10%, color-mix(in oklab, var(--color-dispatch) 14%, transparent), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, color-mix(in oklab, var(--color-ausd) 10%, transparent), transparent 60%),
+    var(--color-page);
+  background-attachment: fixed;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.glass {
+  background: color-mix(in oklab, var(--color-surface) 88%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.55; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+.pulse-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse-ring 1.4s ease-out infinite;
+}
+
+@keyframes flow-line {
+  to { stroke-dashoffset: -24; }
+}
+.flow-line {
+  animation: flow-line 0.7s linear infinite;
+}
+
+@keyframes live-dot {
+  50% { opacity: 0.35; }
+}
+.live-dot {
+  animation: live-dot 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-ring,
+  .flow-line,
+  .live-dot {
+    animation: none;
+  }
+}

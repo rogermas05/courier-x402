@@ -1,0 +1,153 @@
+{
+  "generatedAt": "2026-10-11T22:52:50.734Z",
+  "network": {
+    "id": "eip155:84532",
+    "name": "Base Sepolia",
+    "explorer": "https://sepolia.basescan.org"
+  },
+  "asset": {
+    "symbol": "AUSD",
+    "address": "0xa9012a055bd4e0eDfF8Ce09f960291C09D5322dC",
+    "decimals": 6
+  },
+  "payTo": "0x9593Dee73E9FCe588fB79D6294d1C1e4e14344bF",
+  "provider": "elevenlabs",
+  "pricing": {
+    "baseAusd": "0.05",
+    "perMinuteAusd": "0.05"
+  },
+  "calls": [
+    {
+      "id": "6d13582a0b0492c35772137567af1c70",
+      "status": "completed",
+      "createdAt": "2026-10-11T21:03:24.946Z",
+      "updatedAt": "2026-10-11T21:04:04.268Z",
+      "objective": "This is a quick test call from Dispatch. Ask what their favourite colour is, confirm it back, then say goodbye.",
+      "onBehalfOf": "Roger",
+      "to": "+1 ••• ••• ••40",
+      "maxMinutes": 3,
+      "payment": {
+        "payer": "0xCe46456CE19F5de29F12De977E381caF957B03e9",
+        "amountAusd": "0.2",
+        "transaction": "0xbcf99cc74e20ae7a33d8eb588416dd20cd3f704ef60c763434249c6f5d9b2f44"
+      },
+      "refund": {
+        "amountAusd": "0.1",
+        "transaction": "0x14fa30537cbb94bf6f4d76c28c88c97c192c68350c88b0e26d62f1607b656d71",
+        "failed": false
+      },
+      "outcome": {
+        "summary": "Objective met: the other party said their favourite colour is red, Dispatch confirmed it back ('red it is'), and ended the call with a goodbye.",
+        "objectiveMet": true,
+        "artifacts": {
+          "Favourite colour": "Red (stated by the person who answered)",
+          "Confirmation read-back": "Dispatch said 'Great, red it is.' The other party did not explicitly reply to the read-back before the call ended.",
+          "Call duration": "16 seconds"
+        },
+        "humanFollowUp": null,
+        "caveats": [
+          "The respondent's name and identity were not captured, so it is unknown who the favourite colour belongs to.",
+          "The confirmation was a statement by Dispatch, not a question, and the other party did not verbally acknowledge it.",
+          "This was a test call; the answer is only what was said and has no wider verification.",
+          "No commitments were made or accepted, in line with the information-only authorization."
+        ],
+        "callStatus": "completed",
+        "durationSeconds": 16,
+        "transcript": [
+          {
+            "speaker": "agent",
+            "text": "Hi, I'm calling on behalf of Roger.",
+            "atSeconds": 0
+          },
+          {
+            "speaker": "other",
+            "text": "Hey. How's it going?",
+            "atSeconds": 4
+          },
+          {
+            "speaker": "agent",
+            "text": "Good thanks! Quick question — what's your favourite colour?",
+            "atSeconds": 6
+          },
+          {
+            "speaker": "other",
+            "text": "Red.",
+            "atSeconds": 10
+          },
+          {
+            "speaker": "agent",
+            "text": "Great, red it is. Thanks for your time, goodbye!",
+            "atSeconds": 12
+          }
+        ]
+      },
+      "error": null
+    },
+    {
+      "id": "571cc728264351e56b9a4d7b5425694a",
+      "status": "failed",
+      "createdAt": "2026-10-11T20:57:24.996Z",
+      "updatedAt": "2026-10-11T20:58:58.843Z",
+      "objective": "This is a quick test call. Ask what their favourite colour is, confirm it back, then say goodbye.",
+      "onBehalfOf": "Roger",
+      "to": "+1 ••• ••• ••20",
+      "maxMinutes": 3,
+      "payment": {
+        "payer": "0xCe46456CE19F5de29F12De977E381caF957B03e9",
+        "amountAusd": "0.2",
+        "transaction": "0x1227f44be2b80307f6eb587fba458f9977edd77a70de5e91d3f47ef728286958"
+      },
+      "refund": {
+        "amountAusd": "0.2",
+        "transaction": "0x4f0b0178fa9312b8f254c76a5e8d0f5a9f9a3e6419dd3b17dd9404bb903c569a",
+        "failed": false
+      },
+      "outcome": null,
+      "error": "elevenlabs POST /convai/agents/create -> 422: {\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"conversation_config\",\"agent\",\"prompt\",\"built_in_tools\",\"end_call\",\"name\"],\"msg\":\"Field required\",\"input\":{\"interruption_mode\":\"allow\",\"pre_tool_speech\":\"auto\"}},{\"type\":\"missing\",\"loc\":[\"body\",\"conversation_config\",\"agent\",\"prompt\",\"built_in_tools\",\"end_ca"
+    },
+    {
+      "id": "607d280afab23be94e1a1b7478a0ff01",
+      "status": "completed",
+      "createdAt": "2026-10-11T20:27:34.962Z",
+      "updatedAt": "2026-10-11T20:27:38.820Z",
+      "objective": "Ask whether they have a table for two at 8pm tonight.",
+      "onBehalfOf": "Roger",
+      "to": "+1 ••• ••• ••23",
+      "maxMinutes": 5,
+      "payment": {
+        "payer": "0xCe46456CE19F5de29F12De977E381caF957B03e9",
+        "amountAusd": "0.3",
+        "transaction": "0x355fb0295828b76bf1e67dc90ea36e3b6f2b01dade901a68d56df01a0a93025e"
+      },
+      "refund": {
+        "amountAusd": "0.2",
+        "transaction": "0x35c79fdab27dfd78583b09944b6a25ce7d3302c74fd37de070c6c2a1dfaf60fe",
+        "failed": false
+      },
+      "outcome": {
+        "summary": "The objective was not met. The transcript says no call was placed, so no one was asked about a table for two at 8pm tonight and no availability information was obtained.",
+        "objectiveMet": false,
+        "artifacts": {},
+        "humanFollowUp": "A person needs to contact the restaurant (or use its reservation channel) to ask whether a table for two is available at 8pm tonight. Gather information only unless a commitment is separately authorized.",
+        "caveats": [
+          "The call status says 'completed, duration 42s', but the transcript is a [MOCK] placeholder stating no call was placed. The metadata and transcript conflict, and the transcript shows no conversation with the restaurant. Nothing here establishes availability, hours, or any statement from the restaurant. No bookings, offers, or commitments were made."
+        ],
+        "callStatus": "completed",
+        "durationSeconds": 42,
+        "transcript": [
+          {
+            "speaker": "agent",
+            "text": "[MOCK] No call was placed. Objective was: Ask whether they have a table for two at 8pm tonight.",
+            "atSeconds": 0
+          },
+          {
+            "speaker": "other",
+            "text": "[MOCK] simulated response",
+            "atSeconds": 5
+          }
+        ]
+      },
+      "error": null
+    }
+  ]
+}

@@ -16,7 +16,9 @@
     "test": "npm test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "setup:elevenlabs": "tsx --env-file-if-exists=.env scripts/elevenlabs-setup.ts",
-    "refunds": "npm run refunds -w @dispatch/api"
+    "refunds": "npm run refunds -w @dispatch/api",
+    "export:feed": "tsx --env-file-if-exists=.env scripts/export-feed.ts",
+    "web": "npm run dev -w @dispatch/web"
   },
   "devDependencies": {
     "@types/node": "^22.10.7",

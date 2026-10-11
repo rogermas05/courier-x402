@@ -3,6 +3,7 @@ import { AUSD, formatAusd } from '@dispatch/ausd';
 import type { x402HTTPResourceServer } from '@x402/core/server';
 import { ExpressAdapter } from '@x402/express';
 import express, { type Request, type Response } from 'express';
+import { buildFeed } from './feed.js';
 import { DEFAULT_MINUTES, MAX_MINUTES, validateCall } from './input.js';
 import { priceForCall, REFUND_POLICY, type Pricing } from './price.js';
 import type { Job, JobStore } from './store.js';
@@ -75,6 +76,7 @@ export function createApp(deps: AppDeps) {
 				'POST /v1/calls': 'Paid. Body: {to, objective, authorization?, on_behalf_of?, context?, max_minutes?}. Returns 402 with the AUSD price, then 202 with a call_id once paid.',
 				'GET /v1/calls/{call_id}': 'Free. Status, then the outcome and transcript, and the refund transaction.',
 				'GET /v1/quote?max_minutes=N': 'Free. What a call of up to N minutes costs.',
+				'GET /v1/feed': 'Free. Every call, numbers masked, for the dashboard.',
 			},
 		});
 	});
@@ -140,6 +142,11 @@ export function createApp(deps: AppDeps) {
 		log(`job ${job.id}: paid ${formatAusd(job.payment.amount)} AUSD in ${settled.transaction}, dialing ${job.brief.to}`);
 		deps.start(job);
 		res.status(202).set(settled.headers).json(jobView(job));
+	});
+
+	// Read-only and masked, so the dashboard may be served from anywhere.
+	app.get('/v1/feed', (_req, res) => {
+		res.set('Access-Control-Allow-Origin', '*').json(buildFeed(deps.store.all(), { payTo: deps.payTo, pricing: deps.pricing, provider: deps.provider }));
 	});
 
 	app.get('/v1/calls/:id', (req, res) => {
